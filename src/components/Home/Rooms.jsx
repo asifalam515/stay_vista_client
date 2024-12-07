@@ -4,19 +4,24 @@ import Container from "../Shared/Container";
 import Heading from "../Shared/Heading";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useParams } from "react-router-dom";
 
 const Rooms = () => {
+  const axiosSecure = useAxiosSecure();
   const {
-    isPending,
+    isLoading,
     error,
     data: rooms = [],
   } = useQuery({
     queryKey: ["rooms"],
-    queryFn: () =>
-      fetch("http://localhost:5000/rooms").then((res) => res.json()),
+    queryFn: async () => {
+      const res = await axiosSecure.get("/rooms");
+      return res.data;
+    },
   });
 
-  if (isPending) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <Container>
