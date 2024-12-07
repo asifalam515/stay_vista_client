@@ -6,9 +6,10 @@ import LoadingSpinner from "../Shared/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useParams } from "react-router-dom";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Rooms = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosCommon = useAxiosCommon();
   const {
     isLoading,
     error,
@@ -16,7 +17,7 @@ const Rooms = () => {
   } = useQuery({
     queryKey: ["rooms"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/rooms");
+      const res = await axiosCommon.get("/rooms");
       return res.data;
     },
   });
