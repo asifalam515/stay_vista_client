@@ -12,7 +12,7 @@ const Rooms = () => {
   const axiosCommon = useAxiosCommon();
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
-  console.log(category);
+
   const {
     isLoading,
     error,
