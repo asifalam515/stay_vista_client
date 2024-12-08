@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -122,7 +123,11 @@ const SignUp = () => {
               type="submit"
               className="bg-rose-500 w-full rounded-md py-3 text-white"
             >
-              {loading ? "Wait Please" : "Continue"}
+              {loading ? (
+                <TbFidgetSpinner className="animate-spin m-auto" />
+              ) : (
+                "Continue"
+              )}
             </button>
           </div>
         </form>
