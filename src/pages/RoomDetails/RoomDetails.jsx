@@ -9,17 +9,14 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 const RoomDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
-  const {
-    error,
-    data: room = [],
-    isLoading,
-  } = useQuery({
+  const { data: room = [] } = useQuery({
     queryKey: ["room", id],
     queryFn: async () => {
       const res = await axiosCommon.get(`/rooms/${id}`);
       return res.data;
     },
   });
+
   return (
     <Container>
       <Helmet>
