@@ -149,7 +149,7 @@ const SignUp = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div
+        <button
           disabled={loading}
           onClick={handleGoogleSignIn}
           className="disabled:cursor-not-allowed  flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
@@ -157,7 +157,7 @@ const SignUp = () => {
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
-        </div>
+        </button>
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account?{" "}
           <Link
