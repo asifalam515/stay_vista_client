@@ -39,8 +39,19 @@ const Login = () => {
     }
   };
   // reset password
-  const handleResetPassword = (e) => {
-    console.log(email);
+  const handleResetPassword = async () => {
+    if (!email) {
+      return toast.error("Please Write your Email first");
+    }
+    try {
+      await resetPassword(email);
+
+      toast.success("Request Success!check your email for further process");
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -66,6 +77,7 @@ const Login = () => {
                 type="email"
                 name="email"
                 id="email"
+                onBlur={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Enter Your Email Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900"
