@@ -3,24 +3,28 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const { signIn, signInWithGoogle, resetPassword, setLoading, loading } =
     useAuth();
+  const [email, setEmail] = useState("");
   const handleLogIn = async (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
+    setEmail(email);
     const password = form.password.value;
+
     try {
-      setLoading(true);
       setLoading(true);
       await signIn(email, password);
       await navigate("/");
     } catch (error) {
       toast.error(error.message);
       console.log(error.message);
+      setLoading(false);
     }
   };
   // handle google sign in
@@ -33,6 +37,10 @@ const Login = () => {
     } catch (err) {
       console.log(err.message);
     }
+  };
+  // reset password
+  const handleResetPassword = (e) => {
+    console.log(email);
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -97,7 +105,10 @@ const Login = () => {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline hover:text-rose-500 text-gray-400">
+          <button
+            onClick={handleResetPassword}
+            className="text-xs hover:underline hover:text-rose-500 text-gray-400"
+          >
             Forgot password?
           </button>
         </div>
